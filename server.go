@@ -4,58 +4,61 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
+	//"log"
 	"net/http"
 	"os"
 )
 
 func main() {
-	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/1")
+	response, err := http.Get("http://groupietrackers.herokuapp.com/api/artists")
+
+	if err != nil {
+		fmt.Print(err.Error())
+		os.Exit(1)
+	}
+	
+
+	responseData, err := ioutil.ReadAll(response.Body)
 
 	if err != nil {
 		fmt.Print(err.Error())
 		os.Exit(1)
 	}
 
-	responseData, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
+	var responseObjectArtist ResponseArtist
 
-	var responseObject ResponseArtist
-
-	json.Unmarshal(responseData, &responseObject)
-	//fmt.Println(responseObject)
-
-	 for _, val := range responseObject.Membres {
-		fmt.Println(val)
-	 }
+	json.Unmarshal(responseData, &responseObjectArtist)
+	fmt.Println(responseObjectArtist[0])
 }
 
-type ResponseArtist struct {
-	ID int `json:"id"`
-	Image string `json:"image"`
-	Name string `json:"name"`
-	Membres []string `json:"members"`
-	CreationDate int `json:"creationDate"`
-	FirstAlbum string `json:"firstAlbum"`
-	Locations ResponseLocations `json:"locations"`
-	ConcertDates ResponseDates `json:"concerDates"`
-	Relations ResponseRelation `json:"relations"`
+type ResponseArtist []struct {
+	ID           int      `json:"id"`
+	Image        string   `json:"image"`
+	Name         string   `json:"name"`
+	Members      []string `json:"members"`
+	CreationDate int      `json:"creationDate"`
+	FirstAlbum   string   `json:"firstAlbum"`
+	Locations    string   `json:"locations"`
+	ConcertDates string   `json:"concertDates"`
+	Relations    string   `json:"relations"`
 }
 
 type ResponseLocations struct {
-	ID int `json:"id"`
-	Locations []string `json:"locations"`
-	Dates ResponseDates `json:"dates"`
+	Index []struct {
+		ID        int      `json:"id"`
+		Locations []string `json:"locations"`
+		Dates     string   `json:"dates"`
+	} `json:"index"`
 }
 
 type ResponseDates struct {
-	ID int `json:"id"`
-	Dates []string `json:"dates"`
+	Index []struct {
+		ID    int      `json:"id"`
+		Dates []string `json:"dates"`
+	} `json:"index"`
 }
 
 type ResponseRelation struct {
-	ID int `json:"id"`
+	ID             int `json:"id"`
 	DatesLocations []string
 }
