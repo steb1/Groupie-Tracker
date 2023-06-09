@@ -4,16 +4,27 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-
-	//"log"
+	"log"
 	"net/http"
-	//"os"
+	"text/template"
 )
 
 func main() {
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/Artiste", ArtisteHandler)
+	http.HandleFunc("/css/", ServeCSS)
+
+	//http.HandleFunc("/css/", ServeCSS)
+
+	//on demarre le serveur grace a ListenAndServe en renseignant un numero de port
+	fmt.Printf("Starting server at port 8080\n")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
+
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
 	response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
-	response2, _:= http.Get("http://groupietrackers.herokuapp.com/api/dates")
+	response2, _ := http.Get("http://groupietrackers.herokuapp.com/api/dates")
 	response3, _ := http.Get("http://groupietrackers.herokuapp.com/api/relation")
 
 	//////////////////////////////////////////
@@ -38,11 +49,40 @@ func main() {
 
 	json.Unmarshal(responseData3, &responseObjectRelations)
 
-	/* fmt.Println(responseObjectArtist[0])
+	/* fmt.Println(responseObjectArtist[0].FirstAlbum)
 	fmt.Println(responseObjectLocations.Index[0])
 	fmt.Println(responseObjectDates.Index[0]) */
-	fmt.Println(responseObjectRelations.Index[1] )
+	//fmt.Println(responseObjectRelations.Index[1].DatesLocations["noumea-new_caledonia"])
 
+}
+
+func ServeCSS(w http.ResponseWriter, r *http.Request) {
+	filename := r.URL.Path
+	http.ServeFile(w, r, "template"+filename)
+}
+
+func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./template/artistes.html")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
+	responseData, _ := ioutil.ReadAll(response.Body)
+	var responseObjectArtist ResponseArtist
+	json.Unmarshal(responseData, &responseObjectArtist)
+
+	
+
+	//fmt.Println(responseObjectArtist)
+
+	t.Execute(w, responseObjectArtist)
+}
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("./template/index.html")
+	p := ""
+	t.Execute(w, p)
 }
 
 type ResponseArtist []struct {
@@ -74,7 +114,7 @@ type ResponseDates struct {
 
 type ResponseRelation struct {
 	Index []struct {
-	ID             int              `json:"id"`            
-	DatesLocations map[string][]string `json:"datesLocations"`
-	}	
+		ID             int                 `json:"id"`
+		DatesLocations map[string][]string `json:"datesLocations"`
+	}
 }
