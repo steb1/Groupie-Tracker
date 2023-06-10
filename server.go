@@ -61,6 +61,21 @@ func main() {
 func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query()["ID"]
 	IDD := ID[0]
+	intID, err := strconv.Atoi(IDD) 
+
+	if err != nil {
+		t, _ := template.ParseFiles("./template/404.html")
+		p := ""
+		t.Execute(w, p)
+		return
+	}
+
+	if IDD == "0" || len(ID) == 0 || intID > 57 || IDD == "" {
+		t, _ := template.ParseFiles("./template/404.html")
+		p := ""
+		t.Execute(w, p)
+		return
+	}
 
 	t, err := template.ParseFiles("./template/artisteDetail.html")
 
@@ -68,12 +83,14 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
+
+
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
 	responseData, _ := ioutil.ReadAll(response.Body)
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 
-	intID, _ := strconv.Atoi(IDD)
+
 
 	t.Execute(w, responseObjectArtist[intID-1])
 }
@@ -84,6 +101,13 @@ func ServeCSS(w http.ResponseWriter, r *http.Request) {
 }
 
 func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/Artiste" {
+		t, _ := template.ParseFiles("./template/404.html")
+		p := ""
+		t.Execute(w, p)
+		return
+	}
+
 	t, err := template.ParseFiles("./template/artistes.html")
 
 	if err != nil {
@@ -100,6 +124,13 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		t, _ := template.ParseFiles("./template/404.html")
+		p := ""
+		t.Execute(w, p)
+		return
+	}
+
 	t, _ := template.ParseFiles("./template/index.html")
 	p := ""
 	t.Execute(w, p)
