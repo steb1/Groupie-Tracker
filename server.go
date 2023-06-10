@@ -59,19 +59,8 @@ func main() {
 }
 
 func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request){
-	
 	ID := r.URL.Query()["ID"]
 	IDD := ID[0]
-	intID,_ := strconv.Atoi(IDD)
-
-	if IDD == "0" || len(IDD) == 0 || intID > 57 {
-		//http.NotFound(w, r)
-		t, _ := template.ParseFiles("./template/404.html")
-		p := ""
-		t.Execute(w, p)
-		
-		return
-	}
 
 	t, err := template.ParseFiles("./template/artisteDetail.html")
 
@@ -84,7 +73,7 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request){
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 
-	
+	intID,_ := strconv.Atoi(IDD)
 	
 	t.Execute(w , responseObjectArtist[intID-1])
 }
