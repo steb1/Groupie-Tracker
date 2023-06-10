@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"text/template"
 )
 
@@ -13,11 +14,12 @@ func main() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/Artiste", ArtisteHandler)
 	http.HandleFunc("/css/", ServeCSS)
+	http.HandleFunc("/ArtisteDetail", ArtisteDetailHandler)
 
 	//http.HandleFunc("/css/", ServeCSS)
 
 	//on demarre le serveur grace a ListenAndServe en renseignant un numero de port
-	fmt.Printf("Starting server at port 8080\n")
+	fmt.Printf("Starting server at port 8080\nhttp://localhost:8080/")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
@@ -56,6 +58,26 @@ func main() {
 
 }
 
+func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request){
+	ID := r.URL.Query()["ID"]
+	IDD := ID[0]
+
+	t, err := template.ParseFiles("./template/artisteDetail.html")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
+	responseData, _ := ioutil.ReadAll(response.Body)
+	var responseObjectArtist ResponseArtist
+	json.Unmarshal(responseData, &responseObjectArtist)
+
+	intID,_ := strconv.Atoi(IDD)
+	
+	t.Execute(w , responseObjectArtist[intID-1])
+}
+
 func ServeCSS(w http.ResponseWriter, r *http.Request) {
 	filename := r.URL.Path
 	http.ServeFile(w, r, "template"+filename)
@@ -71,8 +93,6 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 	responseData, _ := ioutil.ReadAll(response.Body)
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
-
-	
 
 	//fmt.Println(responseObjectArtist)
 
