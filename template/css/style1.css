@@ -9,8 +9,8 @@ body{
     flex-wrap: wrap;
     text-align: center;
     align-items: center;
-    background: whitesmoke
-    
+    justify-content: center;
+    background: #10403B;
 }
 
 .Members {
@@ -27,7 +27,7 @@ a {
     overflow: hidden;
     border-radius: 50px;
 }
-img{
+.img{
     height: 500px;
     width: 350px;
     border-radius: 3px;

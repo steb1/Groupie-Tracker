@@ -6,13 +6,13 @@
 }
 
 .wrapper {
-	background: url(ty.jpg) no-repeat;
+	background: #10403B;
 	background-size: cover;
 	height: 100vh;
 }
 
 .navbar {
-	position: fixed;
+	position: relative;
 	height: 80px;
 	width: 100%;
 	top: 0;
@@ -24,6 +24,7 @@
 	width: 140px;
 	height: auto;
 	padding: 20px 100px;
+	float: left;
 }
 
 .navbar ul {
@@ -83,6 +84,7 @@
 	margin: 35px 280px;
 	display: flex;
     justify-content: center;
+
 }
 
 .buttons button {
@@ -91,10 +93,9 @@
 	font-size: 18px;
 	font-weight: 600;
 	color: #ffb3b3;
-	background: red;
+	background: #BFBFBF;
 	outline: none;
 	cursor: pointer;
-	border: 1px solid #cc0000;
 	border-radius: 25px;
 	transition: .4s;
 	

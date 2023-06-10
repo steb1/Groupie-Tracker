@@ -5,10 +5,23 @@
     <meta charset="utf-8">
     <title>Artistes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="./css/style1.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css?v=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/style1.css?v=1.0">
     <title>Hello, world!</title>
   </head>
-<body class="container-flex">  
+<body class="container-flex"> 
+   
+        <nav class="navbar">
+          <img class="logo" src="./css/logo.png">
+          <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+        </nav>
+   
       {{range .}}
       <a href="/ArtisteDetail?ID={{.ID}} ">
         <div class="card">
