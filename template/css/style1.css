@@ -7,11 +7,19 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    text-align: center;
     align-items: center;
     background: whitesmoke
     
 }
 
+.Members {
+    color : #8AA6A3;
+    font-size: 15px;
+}
+a {
+    text-decoration: none;
+}
 .card{
     height: 500px;
     margin: 50px;
@@ -31,7 +39,8 @@ img{
     padding: 6px;
     box-sizing: border-box;
     position: relative;
-    background: rgb(27, 27, 27, .5);
+    background: #4d6966;
+    opacity: 0.9;
     color: white;
     bottom: 70px;
     transition: .5s;
