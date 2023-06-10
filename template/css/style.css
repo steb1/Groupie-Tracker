@@ -92,7 +92,7 @@
 	width: 150px;
 	font-size: 18px;
 	font-weight: 600;
-	color: #ffb3b3;
+	color: black;
 	background: #BFBFBF;
 	outline: none;
 	cursor: pointer;
@@ -107,4 +107,5 @@
 
 .buttons button:hover {
 	background: #cc0000;
+	color: white;
 }

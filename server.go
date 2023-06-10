@@ -58,7 +58,7 @@ func main() {
 
 }
 
-func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request){
+func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query()["ID"]
 	IDD := ID[0]
 
@@ -73,9 +73,9 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request){
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 
-	intID,_ := strconv.Atoi(IDD)
-	
-	t.Execute(w , responseObjectArtist[intID-1])
+	intID, _ := strconv.Atoi(IDD)
+
+	t.Execute(w, responseObjectArtist[intID-1])
 }
 
 func ServeCSS(w http.ResponseWriter, r *http.Request) {
