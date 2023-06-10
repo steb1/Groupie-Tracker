@@ -14,7 +14,7 @@ body{
 }
 
 .Members {
-    color : #8AA6A3;
+    color :#E4F2E7;
     font-size: 15px;
 }
 a {
@@ -39,9 +39,9 @@ a {
     padding: 6px;
     box-sizing: border-box;
     position: relative;
-    background: #4d6966;
+    background: #127369;
     opacity: 0.9;
-    color: white;
+    color: #E4F2E7;
     bottom: 70px;
     transition: .5s;
 }
@@ -65,7 +65,7 @@ span{
 .card:hover .intro{
     height: 220px;
     bottom: 193px;
-    background: black;
+    background: #127369;
 }
 .card:hover .p{
     opacity: 1;
