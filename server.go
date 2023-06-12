@@ -61,7 +61,7 @@ func main() {
 func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query()["ID"]
 	IDD := ID[0]
-	intID, err := strconv.Atoi(IDD) 
+	intID, err := strconv.Atoi(IDD)
 
 	if err != nil {
 		t, _ := template.ParseFiles("./template/404.html")
@@ -84,13 +84,26 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 
-
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
 	responseData, _ := ioutil.ReadAll(response.Body)
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 
+	// response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
+	// responseData1, _ := ioutil.ReadAll(response1.Body)
+	// var responseObjectArtist1 ResponseLocations
+	// json.Unmarshal(responseData1, &responseObjectArtist1)
 
+	// response2, _ := http.Get("http://groupietrackers.herokuapp.com/api/dates")
+	// responseData2, _ := ioutil.ReadAll(response2.Body)
+	// var responseObjectArtist2 ResponseDates
+	// json.Unmarshal(responseData2, &responseObjectArtist2)
+
+	// t.Execute(w, responseObjectArtist1.Index[intID-1])
+	// //fmt.Println(responseObjectArtist1.Index[intID-1])
+	// //fmt.Println()
+	// //fmt.Println(responseObjectArtist2.Index[intID-1])
+	// t.Execute(w, responseObjectArtist2.Index[intID-1])
 
 	t.Execute(w, responseObjectArtist[intID-1])
 }
