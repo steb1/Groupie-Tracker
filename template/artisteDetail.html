@@ -1,41 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{.Artistes.Name}} </title>
-  </head>
-  <body>
-    lrhihrgihn
-    <nav class="navbar">
-      <img class="logo" src="./css/logo.png">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/Artiste">Artistes</a></li>
-        <li><a class="active" href="#">{{.}}</a></li>
-      </ul>
-    </nav>
-    <div class="card">
-      <div class="img-bx">
-        <img src={{.Image}} alt="img" />
-      </div>
-      <div class="content">
-        <div class="detail">
-         
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/template/css/style2.css">
+    <title>Document</title>
+</head>
+<body>
 
-    <!--
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{.Image}} alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{.Name}} </h5>
-            <p class="card-text">{{.CreationDate}}</p>
-        </div>
+<nav class="navbar">
+    <img class="logo" src="./css/logo.png">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/Artiste">Artistes</a></li>
+      <li><a class="active" href="#"></a></li>
+    </ul>
+  </nav>
+{{range .Artistes}}
+  <div class="card">
+    <div class="img-bx">
+      <img src={{.Image}} alt="img" />
     </div>
-    -->
-  </body> 
+    <div class="content">
+        {{.Name}}
+      <div class="detail">
+       {{.CreationDate}}
+      </div>
+    </div>
+  </div>
+{{end}}
+{{range .Locations.Index}} 
+<div>{{.ID}} </div>
+{{end}}
+</body>
+</html>

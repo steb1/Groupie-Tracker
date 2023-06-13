@@ -16,7 +16,7 @@ func main() {
 	http.HandleFunc("/test", test)
 	http.HandleFunc("/Artiste", ArtisteHandler)
 	http.HandleFunc("/css/", ServeCSS)
-	http.HandleFunc("/ArtisteDetail", ArtisteDetailHandler)
+	http.HandleFunc("/ArtisteDetail", test)
 
 	//http.HandleFunc("/css/", ServeCSS)
 
@@ -85,14 +85,10 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	//URL := "http://groupietrackers.herokuapp.com/api/artists" + "/" + IDD
-
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
 	responseData, _ := io.ReadAll(response.Body)
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
-
-	///////////////////////////////////////////////////////////////
 
 	response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
 	responseData1, _ := io.ReadAll(response1.Body)
@@ -105,8 +101,8 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 
-	fmt.Println(data.Artistes)
-
+	fmt.Println(data.Locations)
+	
 	t.Execute(w, data)
 
 }

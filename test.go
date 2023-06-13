@@ -29,7 +29,7 @@ func test(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(data.Locations)
 	
 
-	t, _ := template.ParseFiles("./template/test.html")
+	t, _ := template.ParseFiles("./template/artisteDetail.html")
 	
 	t.Execute(w, data)
 }
