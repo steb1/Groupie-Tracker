@@ -31,7 +31,10 @@
   </div>
 {{end}}
 {{range .Locations.Index}} 
-<div>{{.ID}} </div>
+<div>{{range .Locations}} 
+  <div>{{.}} </div>
+  {{end}}
+</div>
 {{end}}
 </body>
 </html>
