@@ -3,7 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
+	
 	"log"
 	"net/http"
 	"strconv"
@@ -12,6 +13,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/test", test)
 	http.HandleFunc("/Artiste", ArtisteHandler)
 	http.HandleFunc("/css/", ServeCSS)
 	http.HandleFunc("/ArtisteDetail", ArtisteDetailHandler)
@@ -31,10 +33,10 @@ func main() {
 
 	//////////////////////////////////////////
 
-	responseData, _ := ioutil.ReadAll(response.Body)
-	responseData1, _ := ioutil.ReadAll(response1.Body)
-	responseData2, _ := ioutil.ReadAll(response2.Body)
-	responseData3, _ := ioutil.ReadAll(response3.Body)
+	responseData, _ := io.ReadAll(response.Body)
+	responseData1, _ := io.ReadAll(response1.Body)
+	responseData2, _ := io.ReadAll(response2.Body)
+	responseData3, _ := io.ReadAll(response3.Body)
 
 	////////////////////////////////////////
 
@@ -83,29 +85,35 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
+	//URL := "http://groupietrackers.herokuapp.com/api/artists" + "/" + IDD
 
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
-	responseData, _ := ioutil.ReadAll(response.Body)
+	responseData, _ := io.ReadAll(response.Body)
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 
-	// response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
-	// responseData1, _ := ioutil.ReadAll(response1.Body)
-	// var responseObjectArtist1 ResponseLocations
-	// json.Unmarshal(responseData1, &responseObjectArtist1)
+	///////////////////////////////////////////////////////////////
 
-	// response2, _ := http.Get("http://groupietrackers.herokuapp.com/api/dates")
-	// responseData2, _ := ioutil.ReadAll(response2.Body)
-	// var responseObjectArtist2 ResponseDates
-	// json.Unmarshal(responseData2, &responseObjectArtist2)
+	response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
+	responseData1, _ := io.ReadAll(response1.Body)
+	var responseObjectLocations ResponseLocations
+	json.Unmarshal(responseData1, &responseObjectLocations)
 
-	// t.Execute(w, responseObjectArtist1.Index[intID-1])
-	// //fmt.Println(responseObjectArtist1.Index[intID-1])
-	// //fmt.Println()
-	// //fmt.Println(responseObjectArtist2.Index[intID-1])
-	// t.Execute(w, responseObjectArtist2.Index[intID-1])
+	data := &data {
+		Artistes: responseObjectArtist,
+		Locations: responseObjectLocations,
+	}
 
-	t.Execute(w, responseObjectArtist[intID-1])
+
+	fmt.Println(data.Artistes)
+
+	t.Execute(w, data)
+
+}
+
+type data struct {
+	Artistes ResponseArtist
+	Locations ResponseLocations
 }
 
 func ServeCSS(w http.ResponseWriter, r *http.Request) {
@@ -127,7 +135,7 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
-	responseData, _ := ioutil.ReadAll(response.Body)
+	responseData, _ := io.ReadAll(response.Body)
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 
