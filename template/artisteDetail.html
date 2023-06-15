@@ -20,7 +20,7 @@
     </ul>
 </nav>
 <div class="card">
-  <img src={{ (index .Artistes .ID).Image}} class="img">
+  <img src="{{ (index .Artistes .ID).Image}}"  class="img">
   <div class="intro">
       <h1>{{ (index .Artistes .ID).Name}}</h1>
       <h2>{{ (index .Artistes .ID).CreationDate}}</h2>
