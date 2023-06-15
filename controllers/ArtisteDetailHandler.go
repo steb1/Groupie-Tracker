@@ -8,6 +8,8 @@ import (
 
 func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
+	// Recup the ID passed through the URL
+
 	ID := r.URL.Query()["ID"]
 
 	if len(ID[0]) == 0 {
@@ -34,11 +36,14 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	intID -= 1
-
+	
+	// Get request to the API 
 	responseObjectArtist := getArtistes("http://groupietrackers.herokuapp.com/api/artists")
 	responseObjectLocations := getLocations("http://groupietrackers.herokuapp.com/api/locations")
 	responseObjectRelations := getRelations("https://groupietrackers.herokuapp.com/api/dates")
 	responseObjectDates := getDates("https://groupietrackers.herokuapp.com/api/relation")
+
+	//Creating a struct which will contains all the data we want to display in the template
 
 	data := &data{
 		Artistes:  responseObjectArtist,
@@ -48,12 +53,15 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		ID:        intID,
 	}
 
+	// Call the template
+
 	t, err := template.ParseFiles("./template/artisteDetail.html")
 
 	if err != nil {
 		error(w)
 		return
 	}
-
+	
+	// Execute the template
 	t.Execute(w, data)
 }
