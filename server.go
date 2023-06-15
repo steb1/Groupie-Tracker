@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	
+
 	"log"
 	"net/http"
 	"strconv"
@@ -95,21 +95,45 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	var responseObjectLocations ResponseLocations
 	json.Unmarshal(responseData1, &responseObjectLocations)
 
-	data := &data {
-		Artistes: responseObjectArtist,
+	data := &data{
+		Artistes:  responseObjectArtist,
 		Locations: responseObjectLocations,
+		ID : intID,
 	}
 
-
 	fmt.Println(data.Locations)
-	
+
 	t.Execute(w, data)
 
 }
+func test(w http.ResponseWriter, r *http.Request) {
+
+	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
+	responseData, _ := io.ReadAll(response.Body)
+	var responseObjectArtist ResponseArtist
+	json.Unmarshal(responseData, &responseObjectArtist)
+
+	response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
+	responseData1, _ := io.ReadAll(response1.Body)
+	var responseObjectLocations ResponseLocations
+	json.Unmarshal(responseData1, &responseObjectLocations)
+
+	data := &data{
+		Artistes:  responseObjectArtist,
+		Locations: responseObjectLocations,
+	}
+
+	fmt.Println(data.Locations)
+
+	t, _ := template.ParseFiles("./template/artisteDetail.html")
+
+	t.Execute(w, data)
+}
 
 type data struct {
-	Artistes ResponseArtist
+	Artistes  ResponseArtist
 	Locations ResponseLocations
+	ID int
 }
 
 func ServeCSS(w http.ResponseWriter, r *http.Request) {

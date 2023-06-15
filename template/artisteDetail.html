@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/template/css/style2.css">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <title>Artistes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="./css/style.css?v=1.0">
+  <link rel="stylesheet" type="text/css" href="./css/style2.css">
+  
+  <title>Hello, world!</title>
 </head>
 <body>
 
@@ -14,27 +16,22 @@
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="/Artiste">Artistes</a></li>
-      <li><a class="active" href="#"></a></li>
+      <li><a class="active" href="#">{{ (index .Artistes .ID).Name}}</a></li>
     </ul>
-  </nav>
-{{range .Artistes}}
-  <div class="card">
-    <div class="img-bx">
-      <img src={{.Image}} alt="img" />
-    </div>
-    <div class="content">
-        {{.Name}}
-      <div class="detail">
-       {{.CreationDate}}
-      </div>
-    </div>
+</nav>
+<div class="card">
+  <img src={{ (index .Artistes .ID).Image}} class="img">
+  <div class="intro">
+      <h1>{{ (index .Artistes .ID).Name}}</h1>
+      <h2>{{ (index .Artistes .ID).CreationDate}}</h2>
+      <h2>{{ (index .Locations.Index .ID).Locations}}</h2>
   </div>
-{{end}}
-{{range .Locations.Index}} 
-<div>{{range .Locations}} 
+</div>
+</body>
+<!--<div>{{range (index .Locations.Index .ID).Locations }}
+
   <div>{{.}} </div>
   {{end}}
-</div>
-{{end}}
-</body>
+</div> 
+{{ (index .Artistes .ID).Name}}-->
 </html>
