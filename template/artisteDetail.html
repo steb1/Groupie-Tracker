@@ -4,29 +4,65 @@
   <meta charset="utf-8">
   <title>Artistes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="./css/style.css?v=1.0">
-  <link rel="stylesheet" type="text/css" href="./css/style2.css">
+  <link rel="stylesheet" type="text/css" href="./css/style3.css?v=1.0">
   
   <title>Hello, world!</title>
 </head>
 <body>
 
-<nav class="navbar">
-    <img class="logo" src="./css/logo.png">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/Artiste">Artistes</a></li>
-      <li><a class="active" href="#">{{ (index .Artistes .ID).Name}}</a></li>
-    </ul>
-</nav>
-<div class="card">
+
+<div class="wrapper">
+  
+  <div class="profile-top">
+    <nav class="navbar">
+      <img class="logo" src="./css/logo.png">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/Artiste">Artistes</a></li>
+        <li><a class="active" href="#">{{ (index .Artistes .ID).Name}}</a></li>
+      </ul>
+  </nav>
+    <div class="profile-image"><img src="{{ (index .Artistes .ID).Image}}" style="height: 300px; width: 250px;"></div>
+  </div>
+
+  <div class="profile-bottom">
+    <div class="profile-infos">
+      <div class="main-infos">
+        <h3 class="name">{{ (index .Artistes .ID).Name}}</h3>
+        <p class="age grey">{{ (index .Artistes .ID).ID}}</p>
+      </div>
+      <!-- <p class="email">jane.doe@example.com</p> -->
+      <!-- <p class="ville"><ion-icon name="location"></ion-icon>Paris</p> -->
+    </div>
+    
+  </div>
+  
+</div>
+
+<!-- <script
+  type="module"
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script> -->
+
+
+
+
+
+
+
+
+
+<!-- <div class="card">
   <img src="{{ (index .Artistes .ID).Image}}"  class="img">
   <div class="intro">
       <h1>{{ (index .Artistes .ID).Name}}</h1>
       <h2>{{ (index .Artistes .ID).CreationDate}}</h2>
       <h2>{{ (index .Locations.Index .ID).Locations}}</h2>
   </div>
-</div>
+</div> -->
 </body>
 <!--<div>{{range (index .Locations.Index .ID).Locations }}
 
