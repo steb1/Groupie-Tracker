@@ -5,13 +5,10 @@ import (
 	"groupieTracker/controllers"
 	"log"
 	"net/http"
-	"text/template"
 )
 
 func main() {
-	//fileServer := http.FileServer(http.Dir("./templates"))
-
-	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/", controllers.HomeHandler)
 	http.HandleFunc("/Artiste", controllers.ArtisteHandler)
 	http.HandleFunc("/css/", controllers.ServeCSS)
 	http.HandleFunc("/ArtisteDetail", controllers.ArtisteDetailHandler)
@@ -22,17 +19,4 @@ func main() {
 		log.Fatal(err)
 	}
 
-}
-
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		t, _ := template.ParseFiles("./template/404.html")
-		p := ""
-		t.Execute(w, p)
-		return
-	}
-
-	t, _ := template.ParseFiles("./template/index.html")
-	p := ""
-	t.Execute(w, p)
 }
