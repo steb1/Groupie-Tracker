@@ -1,9 +1,6 @@
 package controllers
 
 import (
-	"encoding/json"
-	"fmt"
-	"io"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -12,6 +9,11 @@ import (
 func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	ID := r.URL.Query()["ID"]
+
+	if len(ID[0]) == 0 {
+		error(w)
+		return
+	}
 	IDD := ID[0]
 	intID, err := strconv.Atoi(IDD)
 
@@ -33,23 +35,18 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	intID -= 1
 
-	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
-	responseData, _ := io.ReadAll(response.Body)
-	var responseObjectArtist ResponseArtist
-	json.Unmarshal(responseData, &responseObjectArtist)
-
-	response1, _ := http.Get("http://groupietrackers.herokuapp.com/api/locations")
-	responseData1, _ := io.ReadAll(response1.Body)
-	var responseObjectLocations ResponseLocations
-	json.Unmarshal(responseData1, &responseObjectLocations)
+	responseObjectArtist := getArtistes("http://groupietrackers.herokuapp.com/api/artists")
+	responseObjectLocations := getLocations("http://groupietrackers.herokuapp.com/api/locations")
+	responseObjectRelations := getRelations("https://groupietrackers.herokuapp.com/api/dates")
+	responseObjectDates := getDates("https://groupietrackers.herokuapp.com/api/relation")
 
 	data := &data{
 		Artistes:  responseObjectArtist,
 		Locations: responseObjectLocations,
+		Relation:  responseObjectRelations,
+		Dates:     responseObjectDates,
 		ID:        intID,
 	}
-
-	fmt.Println(data.Locations)
 
 	t, err := template.ParseFiles("./template/artisteDetail.html")
 
