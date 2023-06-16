@@ -1,44 +1,74 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
-
-* {
-	padding: 0;
-	margin: 0;
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.wrapper {
-	background: #10403B;
-	background-size: cover;
-	height: 100vh;
+.html{
+    font-size: 62.5%;
 }
 
-.navbar {
-	position: relative;
-	height: 80px;
-	width: 100%;
-	top: 0;
-	left: 0;
-	background: rgba(0, 0, 0, 0.4);
+.navbar input[type="checkbox"],
+.navbar .hamburger-lines{
+    display: none;
 }
 
+.container{
+    max-width: 1200px;
+    width: 90%;
+    margin: auto;
+}
+
+.navbar{
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #000;
+    opacity: 0.85;
+    z-index: 100;
+}
+
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    align-items: center;
+}
+
+.menu-items{
+    order: 2;
+    display: flex;
+}
 .navbar .logo {
 	width: 140px;
 	height: auto;
-	padding: 20px 100px;
-	float: left;
+	
+	
 }
 
-.navbar ul {
-	float: right;
-	margin-right: 20px;
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+	background: #127369;
+	border-radius: 5px;
+	padding : 4px;
 }
 
-.navbar ul li {
-	list-style: none;
-	margin: 0 8px;
-	display: inline-block;
-	line-height: 80px;
+.menu-items li{
+    list-style: none;
+    margin-left: 1.5rem;
+    font-size: 1.6rem;
 }
 
+.navbar a{
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+	font-weight: bold;
+}
 .navbar ul li a {
 	font-size: 20px;
 	font-family: 'Roboto', sans-serif;
@@ -48,65 +78,157 @@
 	transition: .4s;
 }
 
-.navbar ul li a.active,
-.navbar ul li a:hover {
-	background: #127369;
-	border-radius: 5px;
+
+@media (max-width: 768px){
+    .navbar{
+        opacity: 0.95;
+    }
+
+    .navbar-container input[type="checkbox"],
+    .navbar-container .hamburger-lines{
+        display: block;
+    }
+
+    .navbar-container{
+        display: block;
+        position: relative;
+        height: 64px;
+    }
+
+    .navbar-container input[type="checkbox"]{
+        position: absolute;
+        display: block;
+        height: 32px;
+        width: 30px;
+        top: 20px;
+        left: 20px;
+        z-index: 5;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .navbar-container .hamburger-lines{
+        display: block;
+        height: 28px;
+        width: 35px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .navbar-container .hamburger-lines .line{
+        display: block;
+        height: 4px;
+        width: 100%;
+        border-radius: 10px;
+        background: #fffefe;
+    }
+    
+    .navbar-container .hamburger-lines .line1{
+        transform-origin: 0% 0%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .navbar-container .hamburger-lines .line2{
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .navbar-container .hamburger-lines .line3{
+        transform-origin: 0% 100%;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .navbar .menu-items{
+        padding-top: 100px;
+        background: #000000;
+        height: 100vh;
+        max-width: 300px;
+        transform: translate(-150%);
+        display: flex;
+        flex-direction: column;
+        margin-left: -40px;
+        padding-left: 40px;
+        transition: transform 0.5s ease-in-out;
+        box-shadow:  5px 0px 10px 0px #aaa;
+        overflow: scroll;
+    }
+
+    .navbar .menu-items li{
+        margin-bottom: 1.8rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .logo{
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 2.5rem;
+    }
+
+    .navbar-container input[type="checkbox"]:checked ~ .menu-items{
+        transform: translateX(0);
+    }
+
+    .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line1{
+        transform: rotate(45deg);
+    }
+
+    .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line2{
+        transform: scaleY(0);
+    }
+
+    .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line3{
+        transform: rotate(-45deg);
+    }
+
 }
 
-.wrapper .center {
-	position: absolute;
-	left: 50%;
-	top: 55%;
-	transform: translate(-50%, -50%);
-	font-family: sans-serif;
-	user-select: none;
+@media (max-width: 500px){
+    .navbar-container input[type="checkbox"]:checked ~ .logo{
+        display: none;
+    }
 }
 
-.center h1 {
-	color: white;
-	font-size: 70px;
-	width: 900px;
-	font-weight: bold;
-	text-align: center;
-}
-
-.center h2 {
-	color: white;
-	font-size: 70px;
-	font-weight: bold;
-	margin-top: 10px;
-	width: 885px;
-	text-align: center;
-}
-
-.center .buttons {
-	margin: 35px 280px;
+.center {
 	display: flex;
-    justify-content: center;
-
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30%;
+	font-size: 100%;
+	color: #fffefe;
 }
 
-.buttons button {
-	height: 50px;
+.center a button {
+	background-color: #ffffff;
 	width: 150px;
-	font-size: 18px;
-	font-weight: 600;
-	color: black;
-	background: #BFBFBF;
-	outline: none;
-	cursor: pointer;
+	height: 50px;
+	margin-top: 10px;
+	border-radius: 30px;
+	font-size: larger;
+	font-weight: bold;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.center a {
 	border: 0;
-	border-radius: 25px;
-	transition: .4s;
 	
 }
 
-.buttons .btn2 {
-	margin-left: 25px;
+.center a button :hover {
+	background-color: #127369;
+	transition: .4s;
+
 }
 
-.buttons button:hover {
-	background: #127369;
+.center a  :hover {
+	background-color: #127369;
+	transition: .4s;
+	border: 0;
 	color: white;
 }

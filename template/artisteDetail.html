@@ -5,7 +5,7 @@
   <title>Artistes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="./css/style3.css?v=1.0">
-  
+  <link rel="stylesheet" type="text/css" href="./css/style.css?v=1.0">
   <title>{{ (index .Artistes .ID).Name}}</title>
 </head>
 <body>
@@ -14,13 +14,21 @@
 <div class="wrapper">
   <div class="profile-top">
     <nav class="navbar">
-      <img class="logo" src="./css/logo.png">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/Artiste">Artistes</a></li>
-        <li><a class="active" href="#">{{ (index .Artistes .ID).Name}}</a></li>
-      </ul>
-  </nav>
+      <div class="navbar-container container">
+        <input type="checkbox" name="" id="">
+        <div class="hamburger-lines">
+          <span class="line line1"></span>
+          <span class="line line2"></span>
+          <span class="line line3"></span>
+        </div>
+        <ul class="menu-items">
+          <li><a href="/">Home</a></li>
+          <li><a href="/Artiste">Artists</a></li>
+          <li><a class="active" href="#">{{ (index .Artistes .ID).Name}}</a></li>
+        </ul>
+        <img class="logo" src="./css/logo.png">
+      </div>
+    </nav>
     <div class="profile-image"><img src="{{ (index .Artistes .ID).Image}}" style="height: 300px; width: 250px;"></div>
   </div>
 
@@ -79,7 +87,7 @@
     </div>
     <div class="bodygyal">
       {{range $id, $value := (index .Relation.Index .ID).DatesLocations}}
-      <h3> {{$id}} : {{range $value}} </br><span style="display: flex; text-align: center; justify-content: center; color: grey;">{{.}} </span> {{end}} </h3>
+      <h3> {{$id}} {{range $value}} </br><span style="display: flex; text-align: center; justify-content: center; color: grey;">{{.}} </span> {{end}} </h3>
       {{end}}
     </div>
 </div>
