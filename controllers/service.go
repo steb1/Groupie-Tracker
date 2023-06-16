@@ -39,5 +39,5 @@ type ResponseRelation struct {
 	Index []struct {
 		ID             int                 `json:"id"`
 		DatesLocations map[string][]string `json:"datesLocations"`
-	}
+	} `json:"index"`
 }
