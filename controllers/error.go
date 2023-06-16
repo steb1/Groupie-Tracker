@@ -11,7 +11,7 @@ func error(w http.ResponseWriter) {
 	t, err := template.ParseFiles("./template/404.html")
 	if err != nil {
 		fmt.Fprintf(w, "Internal Server error")
-		w.WriteHeader(500)
+		//w.WriteHeader(500)
 		log.Fatal(err)
 	}
 	p := ""

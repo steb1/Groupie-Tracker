@@ -120,6 +120,7 @@ h3 {
   font-size: 28px;
   margin-bottom: 5px;
   margin-top: 160px;
+  flex-direction: column;
 }
 
 .name {
@@ -162,14 +163,25 @@ h3 {
 
 .screen1 , .screen2 , .screen3 , .screen4, .screen5 {
     width : 400px;
-    min-height: 390px;
+    min-height: 50vh;
     background: #ffffff;
     margin: 40px;
     border-radius: 30px;
 }
 
+.bodygyal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
 
 .screen1 .head, .screen2 .head , .screen3 .head , .screen4 .head, .screen5 .head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 15%;
     width: 100%;
     background-color: #127369;

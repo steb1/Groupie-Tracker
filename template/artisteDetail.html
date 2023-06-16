@@ -6,13 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="./css/style3.css?v=1.0">
   
-  <title>Hello, world!</title>
+  <title>{{ (index .Artistes .ID).Name}}</title>
 </head>
 <body>
 
 
 <div class="wrapper">
-  
   <div class="profile-top">
     <nav class="navbar">
       <img class="logo" src="./css/logo.png">
@@ -29,7 +28,8 @@
     <div class="profile-infos">
       <div class="main-infos">
         <h3 class="name">{{ (index .Artistes .ID).Name}}</h3>
-        <p class="age grey">{{ (index .Artistes .ID).ID}}</p>
+        <p class="">Creation Date<h5 class="grey"> {{ (index .Artistes .ID).CreationDate}}</h5> </p>
+        <p class="">First Album<h5 class="grey"> {{ (index .Artistes .ID).FirstAlbum}}</h5> </p>
       </div>
       <!-- <p class="email">jane.doe@example.com</p> -->
       <!-- <p class="ville"><ion-icon name="location"></ion-icon>Paris</p> -->
@@ -49,22 +49,14 @@
       </div>
     </div>
 
-    <div class="screen2">
-      <div class="head">
-      <h2> Creation Date </h2>
-      </div>
-      <div class="bodygyal">
-       <h3> {{ (index .Artistes .ID).CreationDate}} </h3></br>
-       <h3><p style="font-size: 150%;">FirstAlbum :</p>{{ (index .Artistes .ID).FirstAlbum}} </h3>
-       </div>
-    </div>
+    
 
     <div class="screen4">
         <div class="head">
           <h2>Locations</h2>
         </div>
         <div class="bodygyal">
-          {{range (index .Locations.Index .ID).Locations }}
+          {{range (index .Locations.Index .ID).Locations}}
           <h3>{{.}} </h3>
           {{end}}
         </div>
@@ -75,7 +67,7 @@
         <h2>Concert Dates</h2>
       </div>
       <div class="bodygyal">
-        {{range (index .Dates.Index .ID).Dates }}
+        {{range (index .Dates.Index .ID).Dates}}
         <h3>{{.}} </h3>
         {{end}}
       </div>
