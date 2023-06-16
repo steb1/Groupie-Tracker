@@ -12,7 +12,7 @@ body {
   width: 100vw; */
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   font-family: "Rubik", sans-serif;
 }
 
@@ -20,9 +20,9 @@ body {
   background-color: whitesmoke;
   width: 100%;
   overflow: hidden;
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+  /* box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
 }
 
 .grey {
@@ -75,6 +75,12 @@ body {
 	margin-right: 20px;
 }
 
+h3 {
+    padding: 7px;
+    padding-left: 25px;
+    padding-top: 10px;
+}
+
 .navbar ul li {
 	list-style: none;
 	margin: 0 8px;
@@ -100,7 +106,7 @@ body {
 .profile-bottom {
   /* margin-top: 70px; */
   /* padding: 25px; */
-  height: 74vh;
+  /* height: 74vh; */
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -152,4 +158,37 @@ body {
 .stat {
   font-size: 20px;
   font-weight: 700;
+}
+
+.screen1 , .screen2 , .screen3 , .screen4, .screen5 {
+    width : 400px;
+    min-height: 390px;
+    background: #ffffff;
+    margin: 40px;
+    border-radius: 30px;
+}
+
+
+.screen1 .head, .screen2 .head , .screen3 .head , .screen4 .head, .screen5 .head {
+    height: 15%;
+    width: 100%;
+    background-color: #127369;
+    border-radius: 30px;
+    text-align: center;
+    top : 55%;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    border : 0px
+ }
+.screen1 .head h2, .screen2 .head h2,  .screen3 .head h2 ,  .screen4 .head h2,  .screen5 .head h2{
+   text-align: center;
+   color : rgb(255, 255, 255);
+}
+
+.containerDetail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 60px;
 }

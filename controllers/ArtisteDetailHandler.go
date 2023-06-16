@@ -36,20 +36,20 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	intID -= 1
-	
-	// Get request to the API 
+
+	// Get request to the API
 	responseObjectArtist := getArtistes("http://groupietrackers.herokuapp.com/api/artists")
 	responseObjectLocations := getLocations("http://groupietrackers.herokuapp.com/api/locations")
-	responseObjectRelations := getRelations("https://groupietrackers.herokuapp.com/api/dates")
-	responseObjectDates := getDates("https://groupietrackers.herokuapp.com/api/relation")
+	responseObjectDates := getDates("http://groupietrackers.herokuapp.com/api/dates")
+	responseObjectRelations := getRelations("http://groupietrackers.herokuapp.com/api/relation")
 
 	//Creating a struct which will contains all the data we want to display in the template
 
 	data := &data{
 		Artistes:  responseObjectArtist,
 		Locations: responseObjectLocations,
-		Relation:  responseObjectRelations,
 		Dates:     responseObjectDates,
+		Relation:  responseObjectRelations,
 		ID:        intID,
 	}
 
@@ -61,7 +61,7 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		error(w)
 		return
 	}
-	
+
 	// Execute the template
 	t.Execute(w, data)
 }

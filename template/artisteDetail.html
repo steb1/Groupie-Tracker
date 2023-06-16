@@ -36,6 +36,51 @@
     </div>
     
   </div>
+
+  <div class="containerDetail">
+    <div class="screen1">
+      <div class="head">
+        <h2> Members </h2>
+      </div>
+      <div class="bodygyal">
+        {{range (index .Artistes .ID).Members}}
+          <h3> {{.}} </h3>
+          {{end}}
+      </div>
+    </div>
+
+    <div class="screen2">
+      <div class="head">
+      <h2> Creation Date </h2>
+      </div>
+      <div class="bodygyal">
+       <h3> {{ (index .Artistes .ID).CreationDate}} </h3></br>
+       <h3><p style="font-size: 150%;">FirstAlbum :</p>{{ (index .Artistes .ID).FirstAlbum}} </h3>
+       </div>
+    </div>
+
+    <div class="screen4">
+        <div class="head">
+          <h2>Locations</h2>
+        </div>
+        <div class="bodygyal">
+          {{range (index .Locations.Index .ID).Locations }}
+          <h3>{{.}} </h3>
+          {{end}}
+        </div>
+    </div>
+
+    <div class="screen5">
+      <div class="head">
+        <h2>Concert Dates</h2>
+      </div>
+      <div class="bodygyal">
+        {{range (index .Dates.Index .ID).Dates }}
+        <h3>{{.}} </h3>
+        {{end}}
+      </div>
+  </div>
+</div>
   
 </div>
 

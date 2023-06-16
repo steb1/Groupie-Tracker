@@ -3,8 +3,8 @@ package controllers
 type data struct {
 	Artistes  ResponseArtist
 	Locations ResponseLocations
-	Dates ResponseDates
-	Relation ResponseRelation
+	Dates     ResponseDates
+	Relation  ResponseRelation
 	ID        int
 }
 
