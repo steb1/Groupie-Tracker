@@ -5,6 +5,10 @@
     padding: 0;
     margin: 0;
 }
+.bb{
+    background: url('lebon.jpg');
+    background-size: cover;
+}
 
 .html{
     font-size: 62.5%;
@@ -209,6 +213,7 @@
 	width: 150px;
 	height: 50px;
 	margin-top: 10px;
+    margin-bottom: 50%;
 	border-radius: 30px;
 	font-size: larger;
 	font-weight: bold;

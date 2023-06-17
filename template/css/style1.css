@@ -10,7 +10,8 @@ body{
     text-align: center;
     align-items: center;
     justify-content: center;
-    background: #10403B;
+    background: url(lebon.jpg);
+    background-size: cover;
 }
 
 .Members {
@@ -21,17 +22,18 @@ a {
     text-decoration: none;
 }
 .card{
-    height: 500px;
+    height: 400px;
     margin: 50px;
     box-shadow: 5px 5px 20px black;
     overflow: hidden;
     border-radius: 50px;
 }
 .img{
-    height: 500px;
+    height: 400px;
     width: 350px;
-    border-radius: 3px;
+    border-radius: 400px;
     transition: .5s;
+    opacity: 0.9;
 }
 .intro{
     height: 70px;

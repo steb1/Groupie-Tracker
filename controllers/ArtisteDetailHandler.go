@@ -14,22 +14,23 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(r.URL.Path)
 
-	ID := r.URL.Query()["ID"]
+	ID := r.URL.Query().Get("ID")
 
-	if len(ID[0]) == 0 {
+	if len(ID) == 0 {
 		w.WriteHeader(400)
 		error(w)
 		return
 	}
-	IDD := ID[0]
-	intID, err := strconv.Atoi(IDD)
+
+	intID, err := strconv.Atoi(ID)
 
 	if err != nil {
+		w.WriteHeader(404)
 		error(w)
 		return
 	}
 
-	if IDD == "0" || len(ID) == 0 || intID > 52 || IDD == "" {
+	if ID == "0" || len(ID) == 0 || intID > 52 || ID == "" {
 		t, err := template.ParseFiles("./template/404.html")
 		if err != nil {
 			w.WriteHeader(500)
@@ -37,7 +38,7 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		w.WriteHeader(404)
-		p := "404"
+		p := ""
 		t.Execute(w, p)
 		return
 	}
