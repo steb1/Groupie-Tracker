@@ -1,14 +1,18 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
+
 	"text/template"
 )
 
 func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Recup the ID passed through the URL
+
+	fmt.Println(r.URL.Path)
 
 	ID := r.URL.Query()["ID"]
 
@@ -45,6 +49,14 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	responseObjectLocations := getLocations("http://groupietrackers.herokuapp.com/api/locations")
 	responseObjectDates := getDates("http://groupietrackers.herokuapp.com/api/dates")
 	responseObjectRelations := getRelations("http://groupietrackers.herokuapp.com/api/relation")
+
+	responseObjectLocations.Index[intID].Locations = Title(responseObjectLocations.Index[intID].Locations)
+	responseObjectDates.Index[intID].Dates = DateFormat(responseObjectDates.Index[intID].Dates)
+	responseObjectRelations.Index[intID].DatesLocations = RelationDates(responseObjectRelations.Index[intID].DatesLocations)
+
+	//fmt.Println(responseObjectDates.Index[intID].Dates)
+
+	//fmt.Println(responseObjectRelations.Index[intID].DatesLocations)
 
 	//Creating a struct which will contains all the data we want to display in the template
 

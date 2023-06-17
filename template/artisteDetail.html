@@ -65,7 +65,7 @@
         </div>
         <div class="bodygyal">
           {{range (index .Locations.Index .ID).Locations}}
-          <h3>{{.}} </h3>
+          <h3 style="text-transform: capitalize;">{{.}} </h3>
           {{end}}
         </div>
     </div>
@@ -87,7 +87,7 @@
     </div>
     <div class="bodygyal">
       {{range $id, $value := (index .Relation.Index .ID).DatesLocations}}
-      <h3> {{$id}} {{range $value}} </br><span style="display: flex; text-align: center; justify-content: center; color: grey;">{{.}} </span> {{end}} </h3>
+      <h3 class="Dates" style="text-transform: capitalize; "> {{$id}} </h3> {{range $value}} </br><span style="display: flex; text-align: center; justify-content: center; color: grey; font-weight: bold;">{{.}} </span> {{end}} 
       {{end}}
     </div>
 </div>

@@ -27,7 +27,6 @@ type ResponseLocations struct {
 		Dates     string   `json:"dates"`
 	} `json:"index"`
 }
-
 type ResponseDates struct {
 	Index []struct {
 		ID    int      `json:"id"`
