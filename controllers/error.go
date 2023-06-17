@@ -7,8 +7,9 @@ import (
 	"text/template"
 )
 
-func error(w http.ResponseWriter) {
-	t, err := template.ParseFiles("./template/404.html")
+func error(w http.ResponseWriter, code string) {
+	url := "./template/" + code + ".html"
+	t, err := template.ParseFiles(url)
 	if err != nil {
 		fmt.Fprintf(w, "Internal Server error")
 		//w.WriteHeader(500)

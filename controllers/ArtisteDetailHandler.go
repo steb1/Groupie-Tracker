@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -12,13 +11,13 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Recup the ID passed through the URL
 
-	fmt.Println(r.URL.Path)
+	//fmt.Println(r.URL.Path)
 
 	ID := r.URL.Query().Get("ID")
 
 	if len(ID) == 0 {
 		w.WriteHeader(400)
-		error(w)
+		error(w, "400")
 		return
 	}
 
@@ -26,15 +25,15 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		w.WriteHeader(404)
-		error(w)
+		error(w, "404")
 		return
 	}
 
 	if ID == "0" || len(ID) == 0 || intID > 52 || ID == "" {
-		t, err := template.ParseFiles("./template/404.html")
+		t, err := template.ParseFiles("./template/500.html")
 		if err != nil {
 			w.WriteHeader(500)
-			error(w)
+			error(w, "500")
 			return
 		}
 		w.WriteHeader(404)
@@ -75,7 +74,7 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		w.WriteHeader(500)
-		error(w)
+		error(w, "500")
 		return
 	}
 

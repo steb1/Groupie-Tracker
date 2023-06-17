@@ -11,7 +11,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		t, err := template.ParseFiles("./template/404.html")
 		if err != nil {
 			w.WriteHeader(500)
-			error(w)
+			error(w, "400")
 			return
 		}
 		p := ""

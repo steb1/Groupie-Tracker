@@ -12,7 +12,7 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/Artiste" {
 		t, err := template.ParseFiles("./template/404.html")
 		if err != nil {
-			error(w)
+			error(w, "404")
 			log.Fatal(err)
 		}
 		p := ""
@@ -23,7 +23,7 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./template/artistes.html")
 
 	if err != nil {
-		error(w)
+		error(w, "500")
 		log.Fatal(err)
 	}
 	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
