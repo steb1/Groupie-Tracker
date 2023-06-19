@@ -10,7 +10,8 @@ func ServeCSS(w http.ResponseWriter, r *http.Request) {
 	_, err := template.ParseFiles("./template" + filename)
 
 	if err != nil {
-		w.WriteHeader(404)
+		//w.WriteHeader(404)
+		return
 	}
 	http.ServeFile(w, r, "template"+filename)
 }

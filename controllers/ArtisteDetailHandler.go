@@ -29,11 +29,11 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if  intID > 52 || ID == "" || intID < 1{
-		t, err := template.ParseFiles("./template/500.html")
+	if intID > 52 || ID == "" || intID < 1 {
+		t, err := template.ParseFiles("./template/400.html")
 		if err != nil {
-			w.WriteHeader(500)
-			error(w, "500")
+			w.WriteHeader(400)
+			error(w, "400")
 			return
 		}
 		w.WriteHeader(400)
