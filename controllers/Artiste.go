@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"io"
-	"log"
 	"net/http"
 	"text/template"
 )
@@ -12,8 +11,8 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/Artiste" {
 		t, err := template.ParseFiles("./template/404.html")
 		if err != nil {
-			error(w, "404")
-			log.Fatal(err)
+			error(w, "500")
+			return
 		}
 		p := ""
 		t.Execute(w, p)
@@ -24,10 +23,18 @@ func ArtisteHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		error(w, "500")
-		log.Fatal(err)
+		return
 	}
-	response, _ := http.Get("http://groupietrackers.herokuapp.com/api/artists")
-	responseData, _ := io.ReadAll(response.Body)
+	response, err := http.Get("http://groupietrackers.herokuapp.com/api/artists")
+	if err != nil {
+		error(w, "500")
+		return
+	}
+	responseData, err := io.ReadAll(response.Body)
+	if err != nil {
+		error(w, "500")
+		return
+	}
 	var responseObjectArtist ResponseArtist
 	json.Unmarshal(responseData, &responseObjectArtist)
 

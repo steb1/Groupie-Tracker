@@ -6,9 +6,17 @@ import (
 	"net/http"
 )
 
-func getLocations(s string) ResponseLocations {
-	response1, _ := http.Get(s)
-	responseData1, _ := io.ReadAll(response1.Body)
+func getLocations(s string, w http.ResponseWriter) ResponseLocations {
+	response1, err := http.Get(s)
+	if err != nil {
+		error(w, "500")
+		w.WriteHeader(500)
+	}
+	responseData1, err1 := io.ReadAll(response1.Body)
+	if err1 != nil {
+		error(w, "500")
+		w.WriteHeader(500)
+	}
 	var responseObjectLocations ResponseLocations
 	json.Unmarshal(responseData1, &responseObjectLocations)
 

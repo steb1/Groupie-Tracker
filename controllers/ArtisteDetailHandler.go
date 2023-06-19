@@ -29,14 +29,14 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if ID == "0" || len(ID) == 0 || intID > 52 || ID == "" {
+	if  intID > 52 || ID == "" || intID < 1{
 		t, err := template.ParseFiles("./template/500.html")
 		if err != nil {
 			w.WriteHeader(500)
 			error(w, "500")
 			return
 		}
-		w.WriteHeader(404)
+		w.WriteHeader(400)
 		p := ""
 		t.Execute(w, p)
 		return
@@ -45,10 +45,10 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	intID -= 1
 
 	// Get request to the API
-	responseObjectArtist := getArtistes("http://groupietrackers.herokuapp.com/api/artists")
-	responseObjectLocations := getLocations("http://groupietrackers.herokuapp.com/api/locations")
-	responseObjectDates := getDates("http://groupietrackers.herokuapp.com/api/dates")
-	responseObjectRelations := getRelations("http://groupietrackers.herokuapp.com/api/relation")
+	responseObjectArtist := getArtistes("http://groupietrackers.herokuapp.com/api/artists", w)
+	responseObjectLocations := getLocations("http://groupietrackers.herokuapp.com/api/locations", w)
+	responseObjectDates := getDates("http://groupietrackers.herokuapp.com/api/dates", w)
+	responseObjectRelations := getRelations("http://groupietrackers.herokuapp.com/api/relation", w)
 
 	responseObjectLocations.Index[intID].Locations = Title(responseObjectLocations.Index[intID].Locations)
 	responseObjectDates.Index[intID].Dates = DateFormat(responseObjectDates.Index[intID].Dates)

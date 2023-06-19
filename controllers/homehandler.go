@@ -19,7 +19,12 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	t, _ := template.ParseFiles("./template/index.html")
+	t, err := template.ParseFiles("./template/index.html")
+	if err != nil {
+			w.WriteHeader(404)
+			error(w, "404")
+			return
+		}
 	p := ""
 	t.Execute(w, p)
 }
