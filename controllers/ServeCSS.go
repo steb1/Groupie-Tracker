@@ -11,7 +11,6 @@ func ServeCSS(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		w.WriteHeader(404)
-		return
 	}
 	http.ServeFile(w, r, "template"+filename)
 }
