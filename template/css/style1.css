@@ -27,6 +27,9 @@ a {
     box-shadow: 5px 5px 20px black;
     overflow: hidden;
     border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 .img{
     height: 400px;

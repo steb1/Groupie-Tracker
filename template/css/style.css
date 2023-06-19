@@ -206,6 +206,7 @@
 	margin-top: 30%;
 	font-size: 100%;
 	color: #fffefe;
+    margin-bottom: 500px;
 }
 
 .center a button {
@@ -237,3 +238,16 @@
 	border: 0;
 	color: white;
 }
+
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+/* Colors */
+* {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
