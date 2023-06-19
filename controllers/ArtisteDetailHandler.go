@@ -24,8 +24,8 @@ func ArtisteDetailHandler(w http.ResponseWriter, r *http.Request) {
 	intID, err := strconv.Atoi(ID)
 
 	if err != nil {
-		w.WriteHeader(404)
-		error(w, "404")
+		w.WriteHeader(400)
+		error(w, "400")
 		return
 	}
 

@@ -12,7 +12,7 @@ func error(w http.ResponseWriter, code string) {
 	t, err := template.ParseFiles(url)
 	if err != nil {
 		fmt.Fprintf(w, "Internal Server error")
-		//w.WriteHeader(500)
+		w.WriteHeader(500)
 		log.Fatal(err)
 	}
 	p := ""
